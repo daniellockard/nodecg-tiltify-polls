@@ -54,22 +54,35 @@
 	</div>
 	<script>
 		var pollsRep = nodecg.Replicant("donationpolls", "nodecg-tiltify");
-		let currentPollOptions = []
+		let currentPollIndex = 0;
+		let timeoutID = 0;
+		let currentPolls = []
 		pollsRep.on("change", function (newvalue, oldvalue) {
-			$("#options").empty()
-			newvalue.forEach(poll => {
+			currentPolls = newvalue
+			drawPoll()
+		});
+		timeoutID = setInterval(changePollIndex, 8000)
+		function changePollIndex() {
+			if (currentPollIndex + 1 >= currentPolls.length) {
+				currentPollIndex = 0
+			} else {
+				currentPollIndex++;
+			}
+			drawPoll()
+		}
+		function drawPoll() {
+			$("#options").fadeOut('slow', function () {
+				$("#options").empty()
 				optionTotal = 0
-				poll.options.forEach(option => {
+				currentPolls[currentPollIndex].options.forEach(option => {
 					optionTotal = optionTotal + option.totalAmountRaised
 				});
-
 				$("#options").append(`
 					<div class='container'>
-					<div><p>Poll: <b>${poll.name}</b></p></div>
+					<div><p>Poll: <b>${currentPolls[currentPollIndex].name}</b></p></div>
 					<hr></hr>
 				`)
-				poll.options.forEach(option => {
-
+				currentPolls[currentPollIndex].options.forEach(option => {
 					let optionPercent = (option.totalAmountRaised / optionTotal) * 100
 					$("#options").append(`
 						<p>Poll Option - <b>${option.name}</b></p>
@@ -77,13 +90,12 @@
   							<div class="progress-bar" style="width:${optionPercent}%;" role="progressbar" aria-valuenow="${optionPercent}" aria-valuemin="0" aria-valuemax="100">$${option.totalAmountRaised}</div>
 						</div>
 					`)
+					$("#options").append(`</div>`)
+
 				});
-				$("#options").append(`</div><hr></hr>`)
-
-			});
-
-		});
-
+				$("#options").fadeIn('slow')
+			})
+		}
 	</script>
 </body>
 
