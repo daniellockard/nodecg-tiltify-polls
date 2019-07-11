@@ -71,6 +71,7 @@
 			drawPoll()
 		}
 		function drawPoll() {
+			if (currentPolls.length > 1) {
 			$("#options").fadeOut('slow', function () {
 				$("#options").empty()
 				optionTotal = 0
@@ -95,6 +96,29 @@
 				});
 				$("#options").fadeIn('slow')
 			})
+			} else {
+				$("#options").empty()
+				optionTotal = 0
+				currentPolls[currentPollIndex].options.forEach(option => {
+					optionTotal = optionTotal + option.totalAmountRaised
+				});
+				$("#options").append(`
+					<div class='container'>
+					<div><p>Poll: <b>${currentPolls[currentPollIndex].name}</b></p></div>
+					<hr></hr>
+				`)
+				currentPolls[currentPollIndex].options.forEach(option => {
+					let optionPercent = (option.totalAmountRaised / optionTotal) * 100
+					$("#options").append(`
+						<p>Poll Option - <b>${option.name}</b></p>
+						<div class="progress" style="height:40px">
+  							<div class="progress-bar" style="width:${optionPercent}%;" role="progressbar" aria-valuenow="${optionPercent}" aria-valuemin="0" aria-valuemax="100">$${option.totalAmountRaised}</div>
+						</div>
+					`)
+					$("#options").append(`</div>`)
+
+				});
+			}
 		}
 	</script>
 </body>
