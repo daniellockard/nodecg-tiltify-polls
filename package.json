@@ -1,0 +1,30 @@
+{
+  "name": "nodecg-tiltify-polls",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "Danny Lockard",
+    "email": "danielhlockard@gmail.com",
+    "url": ""
+  },
+  "files": [
+    "graphics"
+  ],
+  "keywords": [
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "bundleDependencies": {
+      "nodecg-tiltify": "^0.0.0"
+    },
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 1920,
+        "height": 294
+      }
+    ]
+  }
+}
