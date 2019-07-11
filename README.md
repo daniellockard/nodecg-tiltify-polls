@@ -4,5 +4,3 @@ You will need to have an appropriate version of NodeCG installed to use it.
 
 Shows the current polls, rotating.
 ![screenshot](screenshot.png)
-
-# nodecg-tiltify-polls
