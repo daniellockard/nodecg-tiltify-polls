@@ -3,4 +3,4 @@ It works with NodeCG versions which satisfy this [semver](https://docs.npmjs.com
 You will need to have an appropriate version of NodeCG installed to use it.
 
 Shows the current polls, rotating between them every 8 seconds
-![screenshot](https://youtu.be/LJYEpg6TcaE)
+[Video](https://youtu.be/LJYEpg6TcaE)
