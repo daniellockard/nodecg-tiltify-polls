@@ -24,7 +24,7 @@
 			margin-block-start: 0px;
 		}
 
-		/* Container for skill bars */
+		/* Container for poll bars */
 		.container {
 			width: 100%;
 			/* Full width */
@@ -57,7 +57,13 @@
 		let currentPollIndex = 0;
 		let currentPolls = []
 		pollsRep.on("change", function (newvalue, oldvalue) {
-			currentPolls = newvalue
+			accumulatedPolls = []
+			newvalue.forEach(poll => {
+				if (poll.active) {
+					accumulatedPolls.push(poll)
+				}
+			});
+			currentPolls = accumulatedPolls
 			drawPoll()
 		});
 		setInterval(changePollIndex, 8000)
